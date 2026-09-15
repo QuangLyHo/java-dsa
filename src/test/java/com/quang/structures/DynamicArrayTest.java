@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DynamicArrayTest {
 
-    private DynamicArray dynamicArray;
+    private DynamicArray<String> dynamicArray;
 
     @BeforeEach
     void setUp() {
-        dynamicArray = new DynamicArray(3);
+        dynamicArray = new DynamicArray<>(3);
     }
 
     @Test

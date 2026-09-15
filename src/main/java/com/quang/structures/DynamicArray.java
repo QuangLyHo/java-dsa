@@ -1,20 +1,22 @@
 package com.quang.structures;
 
-public class DynamicArray {
+public class DynamicArray<T> {
     int size;
     int capacity = 10;
-    Object[] array;
+    T[] array;
 
+    @SuppressWarnings("unchecked")
     public DynamicArray() {
-        this.array = new Object[capacity];
+        this.array = (T[]) new Object[capacity]; 
     }
 
+    @SuppressWarnings("unchecked")
     public DynamicArray(int capacity) {
         this.capacity = capacity;
-        this.array = new Object[capacity];
+        this.array = (T[]) new Object[capacity];
     }
 
-    public void add(Object data) {
+    public void add(T data) {
         if (size >= capacity) {
             grow();
         }
@@ -22,7 +24,7 @@ public class DynamicArray {
         size++;
     }
 
-    public void insert(int index, Object data) {
+    public void insert(int index, T data) {
         if (size >= capacity) {
             grow();
         }
@@ -34,9 +36,9 @@ public class DynamicArray {
         size++;
     }
 
-    public void delete(Object data) {
+    public void delete(T data) {
         for (int i  = 0; i < size; i++) {
-            if (array[i] == data) {
+            if (array[i].equals(data)) {
                 for (int j = 0; j < (size - i - 1); j++) {
                     array[i + j] = array[i + j + 1];
                 }
@@ -46,13 +48,15 @@ public class DynamicArray {
                 if (size <= (int)(capacity / 3)) {
                     shrink();
                 }
+
+                break;
             }
         }
     }
 
-    public int search(Object data) {
+    public int search(T data) {
         for (int i = 0; i < size; i++) {
-            if (array[i] == data) {
+            if (array[i].equals(data)) {
                 return i;
             }
         }
@@ -60,9 +64,10 @@ public class DynamicArray {
         return -1;
     }
 
+    @SuppressWarnings("unchecked")
     private void grow() {
         int newCapacity = (int)(capacity * 2);
-        Object[] newArray = new Object[newCapacity];
+        T[] newArray = (T[]) new Object[newCapacity];
 
         for (int i = 0; i < size; i++) {
             newArray[i] = array[i];
@@ -72,9 +77,10 @@ public class DynamicArray {
         array = newArray;
     }
 
+    @SuppressWarnings("unchecked")
     private void shrink() {
         int newCapacity = (int)(capacity / 2);
-        Object[] newArray = new Object[newCapacity];
+        T[] newArray = (T[]) new Object[newCapacity];
 
         for (int i = 0; i < size; i++) {
             newArray[i] = array[i];
